@@ -1,23 +1,34 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { ThemeProvider } from 'styled-components';
 import './App.css';
+import { Container } from './shared/container';
 
 // Pages
 import Home from './pages/home';
 import WatchRoom from './pages/watchRoom';
 
-function App() {
+function App({ theme }) {
   return (
-    <BrowserRouter>
-    
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/:id" component={WatchRoom} />
-      </Switch>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+            
+          <Container>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/:id" component={WatchRoom} />
+            </Switch>
+          </Container>
 
-    </BrowserRouter>
+        </BrowserRouter>
+      </ThemeProvider>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  theme: state.theme.theme
+});
+
+export default connect(mapStateToProps)(App);
