@@ -9,12 +9,12 @@ const WatchRoom = ({ chat, submitMessage, lightTheme, darkTheme }) => {
     return (
         <div>
             <Link to="/">
-                <button>Home</button>
+                <Button secondary>Home</Button>
             </Link>
 
-            <button onClick={() => submitMessage({name: "mario", msg: "Hi, my name is Mario!"})}>
+            <Button dark onClick={() => submitMessage({name: "mario", msg: "Hi, my name is Mario!"})}>
                 New Message
-            </button>
+            </Button>
 
             <Button onClick={() => lightTheme()}>
                 light Theme

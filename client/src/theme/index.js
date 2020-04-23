@@ -1,12 +1,13 @@
 export const light = {
+    isDark: false,
     colors: {
         primary: "#2269D2",
         secondary: "#D22261",
+        light: "#E5EBEC",
+        dark: "#2D2F33",
         text: "#2D2F33",
         bg: "#E5EBEC",
-    },
-    fonts: {
-        primary: "'Roboto', sans-serif"
+        fg: "#2D2F33"
     },
     breakPoints: {
         sm: "640",
@@ -17,14 +18,15 @@ export const light = {
 };
 
 export const dark = {
+    isDark: true,
     colors: {
         primary: "#2269D2",
         secondary: "#D22261",
+        light: "#E5EBEC",
+        dark: "#2D2F33",
         text: "#E5EBEC",
         bg: "#2D2F33",
-    },
-    fonts: {
-        primary: "'Roboto', sans-serif"
+        fg: "#E5EBEC"
     },
     breakPoints: {
         sm: "640",

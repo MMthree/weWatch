@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NavBar from './components/navbar/NavBar';
 
 import { ThemeProvider } from 'styled-components';
 import './App.css';
@@ -12,10 +13,13 @@ import WatchRoom from './pages/watchRoom';
 
 function App({ theme }) {
   return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} >
         <BrowserRouter>
             
           <Container>
+
+            <NavBar />
+            
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/:id" component={WatchRoom} />

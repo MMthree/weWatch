@@ -1,15 +1,40 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-    background-color: ${props => props.secondary ? props.theme.colors.secondary : props.theme.colors.primary};
+    
+    background-color: ${props => {
+        if(props.secondary) {
+            return props.theme.colors.secondary
+        } else if (props.dark) {
+            return props.theme.colors.text
+        } else {
+            return props.theme.colors.primary
+        }
+    }};
+
+    color: ${(props) => {
+        if(props.dark && !props.isDark) {
+            return props.theme.colors.bg
+        } else {
+            return props.theme.colors.light
+        }
+    }};
+
     border-radius: 3px;
-    color: ${props => props.theme.colors.text};
-    padding: 10px 10px;
+    font-size: 14px;
+    padding: 10px 16px;
     margin: 10px;
-    text-align: center;
     cursor: pointer;
     border: none;
-    font-family: ${props => props.theme.fonts.primary};
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
+    transition: filter 300ms;
+
+    &:hover {
+        filter: brightness(120%);
+    }
+
+    &:focus {
+        outline: none;
+    }
 `
