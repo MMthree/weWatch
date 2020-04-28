@@ -1,22 +1,21 @@
 import { LIGHT_THEME, DARK_THEME } from '../types';
 
-export const toggleTheme = () => (dispatch, getState) => {
-    const themeType = getState().theme.isDark ? LIGHT_THEME : DARK_THEME;
+export const switchTheme = mode => dispatch => {
+    let theme;
+    let localValue;
+    
+    if (mode === "dark") {
+        theme = DARK_THEME
+        localValue = "true"
+    } 
+    if (mode === "light") {
+        theme = LIGHT_THEME
+        localValue = "false"
+    }
+
+    localStorage.setItem("isDark", localValue);
 
     dispatch({
-        type: themeType
-    })
-};
-
-
-export const enableLightTheme = () => dispatch => {
-    dispatch({
-        type: LIGHT_THEME,
-    })
-};
-
-export const enableDarkTheme = () => dispatch => {
-    dispatch({
-        type: DARK_THEME,
-    })
+        type: theme
+    });
 };

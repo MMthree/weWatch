@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { toggleTheme } from '../../actions/themeActions';
+import { switchTheme } from '../../actions/themeActions';
 
 import styled, { keyframes } from 'styled-components';
 
@@ -55,17 +55,10 @@ const StyledIcon = styled.div`
 `;
 
 
-const DarkModeToggle = ({ isDark, toggleTheme }) => {
-
-    const [ani, setAni] = useState(false);
-
-    const handleClick = () => {
-        toggleTheme();
-        setAni(!ani);
-    };
+const DarkModeToggle = ({ isDark, switchTheme }) => {
 
     return (
-        <Pill isDark={isDark} onClick={() => handleClick()}>
+        <Pill isDark={isDark} onClick={() => switchTheme(isDark ? "light" : "dark")}>
             <StyledIcon sun>
                 <i className="fas fa-sun"></i>
             </StyledIcon>
@@ -82,4 +75,4 @@ const mapStateToProps = state => ({
     isDark: state.theme.isDark
 });
 
-export default connect(mapStateToProps, { toggleTheme })(DarkModeToggle)
+export default connect(mapStateToProps, { switchTheme })(DarkModeToggle)

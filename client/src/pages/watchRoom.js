@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from '../shared'
 import { submitMessage } from '../actions/chatActions';
-import { enableLightTheme, enableDarkTheme, toggleTheme } from '../actions/themeActions';
+import { switchTheme } from '../actions/themeActions';
 
-const WatchRoom = ({ chat, submitMessage, lightTheme, darkTheme }) => {
+const WatchRoom = ({ chat, submitMessage, switchTheme }) => {
     return (
         <div>
             <Link to="/">
@@ -16,16 +16,16 @@ const WatchRoom = ({ chat, submitMessage, lightTheme, darkTheme }) => {
                 New Message
             </Button>
 
-            <Button onClick={() => lightTheme()}>
+            <Button onClick={() => switchTheme("light")}>
                 light Theme
             </Button>
 
-            <Button secondary onClick={() => darkTheme()}>
+            <Button secondary onClick={() => switchTheme("dark")}>
                 Dark Theme
             </Button>
 
-            {chat.map(ch => (
-                <div key={ch.msg}>
+            {chat.map((ch, i) => (
+                <div key={i}>
                     <p>{ch.name}</p>
                     <p>{ch.msg}</p>
                 </div>
@@ -35,10 +35,8 @@ const WatchRoom = ({ chat, submitMessage, lightTheme, darkTheme }) => {
 }
 
 const mapActionsToProps = {
-    toggleTheme,
     submitMessage,
-    lightTheme: enableLightTheme,
-    darkTheme: enableDarkTheme
+    switchTheme
 };
 
 const mapStateToProps = state => ({
