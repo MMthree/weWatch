@@ -1,46 +1,66 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
 import { Button } from '../shared'
-import { submitMessage } from '../actions/chatActions';
-import { switchTheme } from '../actions/themeActions';
+import styled from 'styled-components';
+import ChatContainer from '../components/chat/ChatContainer';
 
-const WatchRoom = ({ chat, submitMessage, switchTheme }) => {
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 60% 40%;
+    padding: 10px;
+`;
+
+const WatchRoom = ({ match }) => {
+    const roomId = match.params.id;
+    let socket = useRef();
+
+    const [messages, setMessages] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        socket.current = io("localhost:8080");
+        joinRoom("mario", roomId)
+
+        return () => {
+            socket.current.emit('exit');
+        }
+        //eslint-disable-next-line
+    }, [roomId]);
+
+    useEffect(() => {
+        socket.current.on('message', message => {
+            const msgs = messages;
+            msgs.push(message)
+            setMessages([...msgs]);
+            
+        });
+
+        socket.current.on('roomUsers', u => {
+            setUsers([...users, u]);
+        })
+        //eslint-disable-next-line
+    }, []);
+
+    const joinRoom = (username, room) => {
+        socket.current.emit('joinRoom', {username, room})
+    };
+
+    const sendMessage = msg => {
+        socket.current.emit("chatMessage", msg)
+    };
+
     return (
-        <div>
-            <Link to="/">
-                <Button secondary>Home</Button>
-            </Link>
-
-            <Button dark onClick={() => submitMessage({name: "mario", msg: "Hi, my name is Mario!"})}>
-                New Message
-            </Button>
-
-            <Button onClick={() => switchTheme("light")}>
-                light Theme
-            </Button>
-
-            <Button secondary onClick={() => switchTheme("dark")}>
-                Dark Theme
-            </Button>
-
-            {chat.map((ch, i) => (
-                <div key={i}>
-                    <p>{ch.name}</p>
-                    <p>{ch.msg}</p>
-                </div>
-            ))}
-        </div>
+        <Container>
+            <div>
+                <Button>hello</Button>
+            </div>
+            <ChatContainer 
+                sendMessage={sendMessage}
+                messages={messages}
+            />
+        </Container>
     )
 }
 
-const mapActionsToProps = {
-    submitMessage,
-    switchTheme
-};
 
-const mapStateToProps = state => ({
-    chat: state.chat.messages
-})
-
-export default connect(mapStateToProps, mapActionsToProps)(WatchRoom)
+export default WatchRoom

@@ -13,7 +13,7 @@ import { Container } from './shared/container';
 import Home from './pages/home';
 import WatchRoom from './pages/watchRoom';
 
-function App({ theme, isDark, switchTheme }) {
+function App({ theme, switchTheme }) {
 
   useEffect(() => {
     if (localStorage.isDark) {
@@ -46,7 +46,6 @@ function App({ theme, isDark, switchTheme }) {
 
 const mapStateToProps = state => ({
   theme: state.theme.theme,
-  isDark: state.theme.isDark
 });
 
 export default connect(mapStateToProps, { switchTheme })(App);
