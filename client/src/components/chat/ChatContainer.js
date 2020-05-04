@@ -55,7 +55,9 @@ const ChatContainer = ({ messages, sendMessage }) => {
 
     useEffect(() => {
         chatMessages.current.scrollTop = chatMessages.current.scrollHeight;
-    }, [messages])
+    }, [messages]);
+
+    
     return (
         <Container>
             <BubbleContainer ref={chatMessages}>

@@ -6,8 +6,8 @@ const Bubble = styled.div`
     margin: 6px 6px 6px 0;
     border-radius: 3px;
     font-size: 14px;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    width: fit-content;
+    word-break: break-all;  
     color: ${props => props.theme.colors.dark};
     background-color: ${props => {
         if (props.theme.isDark) {
@@ -23,8 +23,7 @@ const Text = styled.p`
     font-weight: 500;
     margin-bottom: ${props => props.accent ? "6px" : 0};
     opacity: 1;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    
     color: ${props => {
         if (props.accent && props.theme.isDark) {
             return props.theme.colors.dark

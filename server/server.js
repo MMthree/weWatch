@@ -34,7 +34,7 @@ io.on('connection', socket => {
         });
     });
 
-    socket.on('exit', () => {
+    socket.on('disconnect', () => {
         const user = userLeaves(socket.id);
 
         if (user) {
