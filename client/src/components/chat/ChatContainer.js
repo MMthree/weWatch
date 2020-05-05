@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ChatBubble from './ChatBubble';
 import ChatAlert from './ChatAlert';
 import ChatForm from './ChatForm';
+import UserCount from './UserCount';
 
 const Container = styled.div`
     padding: 6px 6px 0 6px;
@@ -49,7 +50,7 @@ const BubbleContainer = styled.div`
     }
 `;
 
-const ChatContainer = ({ messages, sendMessage }) => {
+const ChatContainer = ({ messages, sendMessage, users }) => {
 
     const chatMessages = useRef();
 
@@ -60,6 +61,11 @@ const ChatContainer = ({ messages, sendMessage }) => {
     
     return (
         <Container>
+
+            <UserCount
+                users={users} 
+            />
+
             <BubbleContainer ref={chatMessages}>
 
                 {messages.map((m, i) => (

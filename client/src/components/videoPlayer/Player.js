@@ -17,12 +17,10 @@ const VideoShell = styled.div`
 `;
 
 const Controls = styled.div`
-    z-index: 1;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    height: 40px;
-    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
 `;
 
 const Player = () => {
@@ -30,19 +28,17 @@ const Player = () => {
 
     return (
         <Container>
-
-            <Controls>
-                <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? "Pause" : "Play"}</button>
-            </Controls>
-
             <VideoShell />
             
             <ReactPlayer
                 url="https://www.youtube.com/watch?v=3cC5rRH2e4k"
                 playing={isPlaying}
                 width="100%"
-                height="100%"
             />
+
+            <Controls>
+                <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? "Pause" : "Play"}</button>
+            </Controls>
         </Container>
     )
 }

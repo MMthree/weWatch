@@ -7,7 +7,13 @@ import VideoPlayer from '../videoPlayer/Player';
 const Container = styled.div`
     display: grid;
     grid-template-columns: 60% 40%;
-    padding: 10px;
+    grid-column-gap: 10px;
+
+    @media screen and (max-width: ${props => props.theme.breakPoints.md}px) {
+        grid-template-columns: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 10px;
+    }
 `;
 
 const WatchRoom = ({ roomId, username }) => {
@@ -56,6 +62,7 @@ const WatchRoom = ({ roomId, username }) => {
             <ChatContainer 
                 sendMessage={sendMessage}
                 messages={messages}
+                users={users}
             />
         </Container>
     )

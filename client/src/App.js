@@ -6,8 +6,7 @@ import NavBar from './components/navbar/NavBar';
 
 
 import './App.css';
-import { ThemeProvider } from 'styled-components';
-import { Container } from './shared/container';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 // Pages
 import Home from './pages/home';
@@ -23,13 +22,18 @@ function App({ theme, switchTheme }) {
     //eslint-disable-next-line
   }, []);
 
-  
+  const GlobalStyle = createGlobalStyle`
+    body {
+      background-color: ${props => props.theme.colors.bg};
+      color: ${props => props.theme.colors.text};
+    }
+  `;
 
   return (
       <ThemeProvider theme={theme} >
         <BrowserRouter>
             
-          <Container>
+          <GlobalStyle />
 
             <NavBar />
             
@@ -37,7 +41,6 @@ function App({ theme, switchTheme }) {
               <Route exact path="/" component={Home} />
               <Route path="/:id" component={WatchRoom} />
             </Switch>
-          </Container>
 
         </BrowserRouter>
       </ThemeProvider>
