@@ -20,6 +20,9 @@ app.get("/", (req, res) => {
     res.status(200).json({ msg: "Server up and running" })
 });
 
+// Routes
+app.use("/api/rooms", require("./routes/rooms"));
+
 // Video Chat Room
 const  botName = "ChatBot";
 
