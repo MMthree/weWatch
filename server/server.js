@@ -1,13 +1,18 @@
 const express = require('express');
+require('dotenv').config();
 const http = require('http');
 const socketio = require('socket.io');
+const connectDB = require('./db/db');
 const { userJoin, userLeaves, formatMessage, getCurrentUser, getRoomUsers } = require('./helpers/chat');
 
 const PORT = process.env.PORT || 8080;
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server)
+const io = socketio(server);
+
+// Connect Databse
+connectDB();
 
 app.use(express.json({extended: false}));
 
