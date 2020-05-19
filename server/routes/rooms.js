@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
     })
     .catch(err => {
         console.log(err);
-        res.status(400).json({ error: "Server error"});
+        res.status(400).json({ error: "Unable to create new room"});
     })
 });
 
