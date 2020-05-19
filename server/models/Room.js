@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const RoomSchema = mongoose.Schema({
-    date: {
+    room_id: String,
+    created_at: {
         type: Date,
         default: Date.now
     }
