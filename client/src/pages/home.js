@@ -1,12 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { createRoom } from '../api/rooms';
+import { Button, Loading } from '../shared'
 
-const Home = () => {
+const Home = ({ history }) => {
+
+    const [loading, setLoading] = useState(false);
+
+    const newRoom = async () => {
+        setLoading(true);
+        try {
+            const res = await createRoom();
+            setLoading(false);
+            history.push(`/room/${res.data.room_id}`);
+        } catch (err) {
+            setLoading(false);
+            console.log(err.response)
+        }
+    };
+
     return (
         <div>
-          <Link to="/asdflkjlksafd">
-                <button>Watch Room</button>
-            </Link>
+            <Button 
+                secondary 
+                onClick={newRoom}
+            >
+                Create New Room
+                {loading    
+                    ? <Loading size={"20px"} />
+                    : ""
+                }
+            </Button>
         </div>
     )
 }

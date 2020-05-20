@@ -39,7 +39,7 @@ function App({ theme, switchTheme }) {
             
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/:id" component={WatchRoom} />
+              <Route exact path="/room/:id" component={WatchRoom} />
             </Switch>
 
         </BrowserRouter>

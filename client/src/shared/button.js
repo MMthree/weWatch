@@ -19,7 +19,9 @@ export const Button = styled.button`
             return props.theme.colors.light
         }
     }};
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 3px;
     font-size: 14px;
     padding: 10px 16px;
