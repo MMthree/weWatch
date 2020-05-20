@@ -23,4 +23,27 @@ router.post("/", (req, res) => {
     })
 });
 
+// check if room id exists
+router.get("/:id" , (req, res) => {
+    let roomId = req.params.id;
+    if (!roomId) {
+        res.status(400).json({ error: "Missing Room ID"})
+    };
+
+    Room.findOne({
+        room_id: roomId
+    })
+    .then(room => {
+        if (!room) {
+            res.status(400).json({ error: `Room ${roomId} does not exist` });
+        } else {
+            res.status(200).json(room)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({ error: "Unable to get room" });
+    });
+});
+
 module.exports = router;

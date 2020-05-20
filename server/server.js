@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const http = require('http');
 const socketio = require('socket.io');
+const cors = require('cors');
 const connectDB = require('./db/db');
 const { userJoin, userLeaves, formatMessage, getCurrentUser, getRoomUsers } = require('./helpers/chat');
 
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+app.use(cors());
 
 // Connect Databse
 connectDB();
